@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📞 Escape Call Assistant</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="One-tap escape call assistant for urgent situations">
+    <meta name="theme-color" content="#FF4757">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Escape Call">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📞 Escape Call Assistant</h1>
+            <p class="subtitle">One-tap phone call for urgent situations</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Phone Number Setup -->
+            <section class="phone-setup" id="phoneSetup">
+                <h2>📱 Setup Your Phone</h2>
+                <div class="input-group">
+                    <label for="phoneNumber">Your Phone Number</label>
+                    <input type="tel" id="phoneNumber" placeholder="+91xxxxxxxxxx" class="phone-input">
+                    <small>Include country code (e.g., +91 for India, +1 for US)</small>
+                </div>
+
+                <div class="input-group">
+                    <label for="customMessage">Custom Message (Optional)</label>
+                    <textarea id="customMessage"
+                        placeholder="Please call me back urgently. I need to step away from this meeting." rows="3"
+                        class="message-input"></textarea>
+                </div>
+
+                <button id="saveSettings" class="btn btn-secondary">
+                    💾 Save Settings
+                </button>
+            </section>
+
+            <!-- Main Actions -->
+            <section class="actions" id="mainActions" style="display: none;">
+                <div class="user-info">
+                    <p>📞 Ready to call: <span id="displayPhoneNumber"></span></p>
+                    <button id="editSettings" class="btn-link">✏️ Edit</button>
+                </div>
+
+                <!-- Emergency Call Button -->
+                <div class="emergency-section">
+                    <button id="emergencyCall" class="btn btn-emergency">
+                        📞 ESCAPE CALL NOW
+                    </button>
+                    <p class="help-text">Tap to receive an immediate call</p>
+                </div>
+
+                <!-- Scheduled Call Section -->
+                <div class="schedule-section">
+                    <h3>⏰ Schedule Call</h3>
+                    <div class="schedule-options">
+                        <button class="btn btn-schedule" data-delay="1">In 1 minute</button>
+                        <button class="btn btn-schedule" data-delay="3">In 3 minutes</button>
+                        <button class="btn btn-schedule" data-delay="5">In 5 minutes</button>
+                        <button class="btn btn-schedule" data-delay="10">In 10 minutes</button>
+                    </div>
+
+                    <div class="custom-schedule">
+                        <input type="number" id="customDelay" min="1" max="1440" placeholder="Minutes"
+                            class="delay-input">
+                        <button id="customSchedule" class="btn btn-schedule">Schedule</button>
+                    </div>
+                </div>
+
+                <!-- Status Section -->
+                <section class="status-section">
+                    <h3>📊 Status</h3>
+                    <div id="callStatus" class="status-display">
+                        <p>Ready to place calls</p>
+                    </div>
+                </section>
+
+                <!-- Scheduled Calls -->
+                <section class="scheduled-calls">
+                    <h3>📅 Scheduled Calls</h3>
+                    <div id="scheduledCallsList" class="scheduled-list">
+                        <p class="empty-state">No scheduled calls</p>
+                    </div>
+                    <button id="refreshScheduled" class="btn btn-secondary btn-small">
+                        🔄 Refresh
+                    </button>
+                </section>
+            </section>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p id="loadingText">Placing your escape call...</p>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>
