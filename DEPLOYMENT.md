@@ -56,9 +56,9 @@ After deployment, you **MUST** set up environment variables in Vercel:
 
 | Variable | Value | Example |
 |----------|-------|---------|
-| `TWILIO_ACCOUNT_SID` | Your Twilio Account SID | `AC288837aa6ab42632d46881ce89ca4bbf` |
+| `TWILIO_ACCOUNT_SID` | Your Twilio Account SID | `dummy-AC2886881ce89ca4bbf` |
 | `TWILIO_AUTH_TOKEN` | Your Twilio Auth Token | `your_auth_token_here` |
-| `TWILIO_PHONE_NUMBER` | Your Twilio Phone Number | `+18583302457` |
+| `TWILIO_PHONE_NUMBER` | Your Twilio Phone Number | `+1987654321` |
 | `NODE_ENV` | `production` | `production` |
 | `DEFAULT_MESSAGE` | Your default message | `Please call me back urgently! I need to step away from this meeting.` |
 
